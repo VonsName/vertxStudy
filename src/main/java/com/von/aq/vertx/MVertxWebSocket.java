@@ -23,6 +23,28 @@ public class MVertxWebSocket extends AbstractVerticle {
         Router router = Router.router(vertx);
         router.route("/ws").handler(routingContext -> routingContext.response().sendFile("D:\\myTest\\von-activemq\\src\\main\\java\\com\\von\\aq\\vertx\\so.html"));
 
+//        server.requestHandler(httpServerRequest -> {
+//            httpServerRequest.response().setStatusCode(101).end();
+//            System.out.println(httpServerRequest.path());
+//            if (httpServerRequest.path().startsWith("/ws")) {
+//                System.out.println("-------------------");
+//                ServerWebSocket webSocket = httpServerRequest.upgrade();
+//                String s = webSocket.binaryHandlerID();
+//                map.putIfAbsent(s, webSocket);
+//                webSocket.frameHandler(handler -> {
+//                    String data = handler.textData();
+//                    String cuID = webSocket.binaryHandlerID();
+//                    for (Map.Entry<String, ServerWebSocket> entry : map.entrySet()) {
+//                        String key = entry.getKey();
+//                        if (!key.equalsIgnoreCase(cuID)) {
+//                            ServerWebSocket socket = entry.getValue();
+//                            socket.writeTextMessage("\r\n" + data + "\r\n");
+//                        }
+//                    }
+//                });
+//                webSocket.closeHandler(handler -> map.remove(s));
+//            }
+//        });
         server.websocketHandler(serverWebSocket -> {
             String s = serverWebSocket.binaryHandlerID();
             map.putIfAbsent(s, serverWebSocket);
